@@ -1,0 +1,64 @@
+<div
+  class="frame-container bg-white d-block d-md-flex justify-content-center align-items-center flex-column"
+>
+  <div
+    class="w-100 d-flex justify-content-start align-items-center flex-column p-4"
+    style="max-width: 750px"
+  >
+    <img
+      class="w-100"
+      style="max-width: 300px; aspect-ratio: 2.5; object-fit: contain"
+      src="assets/printwell.png"
+    />
+
+    <div
+      class="w-100 d-flex justify-content-center align-items-center flex-column"
+    >
+      <p class="w-100 text-center text-secondary mb-2 mt-3 py-3">
+        Print Design Generator
+      </p>
+
+      <!-- <mat-radio-group
+        class="mx-auto mb-3"
+        aria-label="Select an option"
+        (change)="selectedType = $event.value"
+      >
+        <mat-radio-button
+          *ngFor="let type of types"
+          class="mx-2"
+          [value]="type.id"
+          [checked]="selectedType == type.id"
+          >{{ type.name }}</mat-radio-button
+        >
+      </mat-radio-group> -->
+    </div>
+
+    <div
+      class="w-100 d-flex justify-content-center align-items-center flex-column"
+    >
+      <ion-searchbar
+        searchIcon="color-wand-outline"
+        class="rounded-bar"
+        animated="true"
+        placeholder="Describe a design"
+        (ionInput)="setPrompt($event)"
+      ></ion-searchbar>
+      <button
+        class="mx-auto mt-3 btn bg-gradient text-white fw-bold"
+        (click)="generateDesign()"
+      >
+        <span
+          class="spinner-border spinner-border-sm me-1"
+          role="status"
+          aria-hidden="true"
+          *ngIf="loading"
+        ></span>
+
+        {{ loading ? "Generating" : "Generate Design" }}
+      </button>
+    </div>
+  </div>
+  <!-- <div class="w-100 mt-5">
+    <app-section [mystics]="mystics"></app-section>
+  </div> -->
+</div>

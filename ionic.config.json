@@ -1,0 +1,10 @@
+{
+  "projects": {
+    "mikebot": {
+      "name": "mikebot",
+      "integrations": {},
+      "type": "angular"
+    }
+  },
+  "defaultProject": "mikebot"
+}

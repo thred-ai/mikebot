@@ -1,1 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+:root {
+  --vh: 100vh;
+}
+
+.frame-container {
+  width: 100%;
+  height: calc(var(--vh, 1vh) * 100);
+  overflow-y: scroll !important;
+}
+
+.app-full-bleed-dialog .mat-dialog-container {
+  padding: 0;
+  border-radius: 0;
+}
+
+@media (max-width: 768px) {
+  .app-full-bleed-sm-dialog .mat-dialog-container {
+    padding: 2px;
+  }
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
