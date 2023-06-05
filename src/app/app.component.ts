@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
   title = 'mikebot';
 
-  image?: string = undefined;
+  image?: string = 'https://media.contentapi.ea.com/content/dam/eacom/lost-in-random/images/2021/06/lir-1920x1080-junktown-nologo.jpg.adapt.crop16x9.1455w.jpg';
 
   
 
