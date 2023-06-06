@@ -28,7 +28,7 @@
               "src/assets",
               {
                 "glob": "**/*",
-                "input": "./node_modules/photoeditorsdk/assets",
+                "input": "./node_modules/demo-vai/assets",
                 "output": "./assets/photoeditorsdk/"
               },
               {
