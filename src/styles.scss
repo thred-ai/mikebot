@@ -11,6 +11,12 @@
   overflow-y: scroll !important;
 }
 
+.frame-container-2 {
+  width: 100%;
+  height: calc(calc(var(--vh, 1vh) * 100) - 70px);
+  overflow-y: scroll !important;
+}
+
 .app-full-bleed-dialog .mat-dialog-container {
   padding: 0;
   border-radius: 0;

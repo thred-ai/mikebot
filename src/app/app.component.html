@@ -1,4 +1,21 @@
-<app-photo-editor *ngIf="image; else newImage" [src]="image"></app-photo-editor>
+<ng-container *ngIf="image; else newImage">
+  <div
+    class="w-100 d-flex justify-content-between align-items-center"
+    style="height: 70px; background-color: #242424"
+  >
+    <!-- <button class="mx-2 btn btn-transparent text-white"><mat-Back</button> -->
+    <ion-button class="mx-2 text-white back-btn" (click)="image = undefined">
+      <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
+      Retry
+    </ion-button>
+
+    <ion-button class="mx-2 text-white back-btn">
+      <ion-icon slot="end" name="print-outline"></ion-icon>
+      Print
+    </ion-button>
+  </div>
+  <app-photo-editor [src]="image"></app-photo-editor>
+</ng-container>
 
 <ng-template #newImage>
   <app-generate (imageChanged)="image = $event"> </app-generate>
