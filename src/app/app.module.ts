@@ -13,23 +13,31 @@ import { environment } from '../environments/environment';
 import { GenerateComponent } from './generate/generate.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IonicModule } from '@ionic/angular';
-import {MatRadioModule} from '@angular/material/radio';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    PhotoEditorComponent,
-    GenerateComponent
-  ],
+  declarations: [AppComponent, PhotoEditorComponent, GenerateComponent],
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
     AppRoutingModule,
     BrowserAnimationsModule,
     MatRadioModule,
+    MatChipsModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatCheckboxModule,
+    FormsModule,
     IonicModule.forRoot(),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

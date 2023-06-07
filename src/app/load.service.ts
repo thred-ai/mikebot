@@ -18,6 +18,7 @@ export class LoadService {
 
   async generate(
     prompt: string,
+    neg: string,
     type: 'other' | 'logo' = 'other'
   ): Promise<string> {
     return new Promise((resolve, reject) => {
@@ -25,6 +26,7 @@ export class LoadService {
         .httpsCallable('generate')({
           type,
           prompt,
+          neg,
         })
         .pipe(first())
         .subscribe(

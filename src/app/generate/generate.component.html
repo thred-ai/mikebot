@@ -36,15 +36,74 @@
     <div
       class="w-100 d-flex justify-content-center align-items-center flex-column"
     >
-      <ion-searchbar
+      <!-- <ion-searchbar
         searchIcon="color-wand-outline"
         class="rounded-bar"
         animated="true"
         placeholder="Describe a design"
         (ionInput)="setPrompt($event)"
-      ></ion-searchbar>
+      ></ion-searchbar> -->
+
+      <mat-form-field
+        class="example-chip-list w-100 rounded border"
+        style="overflow: hidden"
+      >
+        <mat-label>Input Prompts</mat-label>
+        <mat-chip-grid #chipGrid aria-label="Enter fruits">
+          <mat-chip-row
+            *ngFor="let fruit of prompts"
+            (removed)="removePrompt(fruit)"
+            [editable]="true"
+            (edited)="editPrompt(fruit, $event)"
+            [aria-description]="'press enter to edit ' + fruit"
+          >
+            {{ fruit }}
+            <button matChipRemove [attr.aria-label]="'remove ' + fruit">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip-row>
+          <input
+            matInput
+            placeholder="New prompt..."
+            [matChipInputFor]="chipGrid"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="addOnBlur"
+            (matChipInputTokenEnd)="addPrompt($event)"
+          />
+        </mat-chip-grid>
+      </mat-form-field>
+
+      <mat-form-field
+        class="example-chip-list w-100 rounded border my-4"
+        style="overflow: hidden"
+      >
+        <mat-label>Negative Prompts</mat-label>
+        <mat-chip-grid #chipGrid2 aria-label="Enter fruits">
+          <mat-chip-row
+            *ngFor="let fruit of negativePrompts"
+            (removed)="removeNegPrompt(fruit)"
+            [editable]="true"
+            (edited)="editNegPrompt(fruit, $event)"
+            [aria-description]="'press enter to edit ' + fruit"
+          >
+            {{ fruit }}
+            <button matChipRemove [attr.aria-label]="'remove ' + fruit">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip-row>
+          <input
+            matInput
+            placeholder="New prompt..."
+            [matChipInputFor]="chipGrid2"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="addOnBlur"
+            (matChipInputTokenEnd)="addNegPrompt($event)"
+          />
+        </mat-chip-grid>
+      </mat-form-field>
+
       <button
-        class="mx-auto mt-3 btn bg-gradient text-white fw-bold"
+        class="mx-auto my-3 btn bg-gradient text-white fw-bold"
         (click)="generateDesign()"
       >
         <span
@@ -56,6 +115,18 @@
 
         {{ loading ? "Generating" : "Generate Design" }}
       </button>
+
+      <div class="text-start border-top w-100 mt-3 bg-light d-flex justify-content-center align-items-start flex-column">
+        <p class="w-100 text-start text-secondary mb-2 mt-3 py-3">
+          Additional Configurations
+        </p>
+        <ng-container *ngFor="let fill of autofills">
+          <mat-checkbox [(ngModel)]="fill.active">
+            {{ fill.name }}
+          </mat-checkbox>
+        </ng-container>
+      </div>
+      
     </div>
   </div>
   <!-- <div class="w-100 mt-5">

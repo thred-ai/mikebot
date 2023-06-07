@@ -9,6 +9,7 @@ export class AppComponent implements OnInit {
   title = 'mikebot';
 
   image?: string = undefined
+
   
 
   ngOnInit(): void {
