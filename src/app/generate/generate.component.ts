@@ -14,6 +14,30 @@ export class GenerateComponent implements OnInit {
   @Output() imageChanged = new EventEmitter<string>();
 
   selectedType: 'other' | 'logo' = 'other';
+  width: number = 512;
+  height: number = 512;
+
+  changeWidth(event: any) {
+    this.width = Number(event.value) ?? 512;
+  }
+
+  changeHeight(event: any) {
+    this.height = Number(event.value) ?? 512;
+  }
+
+  widthChanged(newWidth: number){
+    if (newWidth == 1024 && this.height > 768){
+      this.height = 768
+    }
+    this.width = newWidth
+  }
+
+  heightChanged(newHeight: number){
+    if (newHeight == 1024 && this.width > 768){
+      this.width = 768
+    }
+    this.height = newHeight
+  }
 
   types = [
     {
@@ -28,14 +52,14 @@ export class GenerateComponent implements OnInit {
 
   autofills = [
     {
-      name: 'No Text',
+      name: 'Remove Text',
       text: 'No text',
       neg_text:
         'text, watermark, letters, alphabet, Graffiti, typography, bad text, language',
       active: false,
     },
     {
-      name: 'Realistic',
+      name: 'Ultra Realistic',
       text: 'ultra detailed, hyper realistic, professional lighting, RAW, prophoto rgb, 16bit, 35mm',
       neg_text:
         'blur, haze, too many fingers, overexposed, cropped head, bad frame, out of frame, deformed, cripple, old, fat, ugly, poor, missing arm, extra arms, extra legs, extra head, extra face',
@@ -45,28 +69,54 @@ export class GenerateComponent implements OnInit {
 
   loading = false;
 
-  async generateDesign(
-    type: 'other' | 'logo' = this.selectedType,
-  ) {
-    var prompt = this.prompts.filter(p => p.trim() != "").join(",")
-    var neg_prompt = this.negativePrompts.filter(p => p.trim() != "").join(",")
+  async generateDesign(type: 'other' | 'logo' = this.selectedType) {
+    var prompt = this.prompts.filter((p) => p.trim() != '').join(',');
+    var neg_prompt = this.negativePrompts
+      .filter((p) => p.trim() != '')
+      .join(',');
 
-    if (prompt && prompt != "") {
-      this.autofills.forEach(m => {
-        if (m.active){
-          prompt += ', ' + m.text
-          neg_prompt += ', ' + m.neg_text
+    if (prompt && prompt != '') {
+      this.autofills.forEach((m) => {
+        if (m.active) {
+          prompt += ', ' + m.text;
+          neg_prompt += ', ' + m.neg_text;
         }
-      })
+      });
       console.log(prompt);
       console.log(neg_prompt);
 
       this.loading = true;
-      let result = await this.l.generate(prompt, neg_prompt, type);
+
+      let dimensions = {
+        width: this.width,
+        height: this.height,
+      };
+
+      var result: string | undefined;
+
+      try {
+        result = await this.l.generate(prompt, neg_prompt, type, dimensions);
+      } catch (error) {
+        try {
+          result = await this.l.generate(prompt, neg_prompt, type, dimensions);
+        } catch (error) {
+          console.log(error);
+        }
+      }
       console.log(result);
       this.loading = false;
-      this.imageChanged.emit(result);
+      if (result){
+        this.imageChanged.emit(result);
+      }
     }
+  }
+
+  formatLabel(value: number): string {
+    // if (value >= 1000) {
+    //   return Math.round(value / 1000) + 'k';
+    // }
+
+    return `${value}` + 'px';
   }
 
   constructor(private l: LoadService) {}

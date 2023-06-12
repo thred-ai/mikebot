@@ -10,7 +10,9 @@ export class AppComponent implements OnInit {
 
   image?: string = undefined
 
-  
+  regenerate(){
+    
+  }
 
   ngOnInit(): void {
     let vh = window.innerHeight * 0.01;

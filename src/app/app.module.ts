@@ -16,6 +16,8 @@ import { IonicModule } from '@ionic/angular';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatInputModule } from '@angular/material/input';
+import { MatSliderModule } from '@angular/material/slider';
+
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -34,6 +36,7 @@ import { FormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatIconModule,
     MatCheckboxModule,
+    MatSliderModule,
     FormsModule,
     IonicModule.forRoot(),
   ],

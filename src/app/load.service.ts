@@ -19,7 +19,11 @@ export class LoadService {
   async generate(
     prompt: string,
     neg: string,
-    type: 'other' | 'logo' = 'other'
+    type: 'other' | 'logo' = 'other',
+    dimensions = {
+      width: 500,
+      height: 500
+    }
   ): Promise<string> {
     return new Promise((resolve, reject) => {
       this.functions
@@ -27,6 +31,7 @@ export class LoadService {
           type,
           prompt,
           neg,
+          dimensions
         })
         .pipe(first())
         .subscribe(

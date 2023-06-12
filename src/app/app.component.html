@@ -1,13 +1,22 @@
-<ng-container *ngIf="image; else newImage">
+<ng-container *ngIf="image">
   <div
     class="w-100 d-flex justify-content-between align-items-center"
     style="height: 70px; background-color: #242424"
   >
     <!-- <button class="mx-2 btn btn-transparent text-white"><mat-Back</button> -->
-    <ion-button class="mx-2 text-white back-btn" (click)="image = undefined">
-      <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
-      Retry
-    </ion-button>
+    <div class="d-flex justify-content-start align-items-center">
+      <ion-button class="mx-2 text-white back-btn" (click)="image = undefined">
+        <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
+        Back
+      </ion-button>
+      <ion-button class="mx-2 text-white back-btn" (click)="image = undefined; generate.generateDesign()">
+        <ion-icon
+          slot="start"
+          name="reload-outline"
+        ></ion-icon>
+        Regenerate
+      </ion-button>
+    </div>
 
     <ion-button class="mx-2 text-white back-btn">
       <ion-icon slot="end" name="print-outline"></ion-icon>
@@ -17,8 +26,8 @@
   <app-photo-editor [src]="image"></app-photo-editor>
 </ng-container>
 
-<ng-template #newImage>
-  <app-generate (imageChanged)="image = $event"> </app-generate>
-</ng-template>
+<div class="w-100 h-100" [hidden]="image != undefined">
+  <app-generate #generate (imageChanged)="image = $event"> </app-generate>
+</div>
 
 <!-- <router-outlet *ngIf=""></router-outlet> -->
