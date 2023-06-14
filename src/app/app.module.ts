@@ -22,9 +22,16 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
+import { EmailComponent } from './email/email.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
-  declarations: [AppComponent, PhotoEditorComponent, GenerateComponent],
+  declarations: [
+    AppComponent,
+    PhotoEditorComponent,
+    GenerateComponent,
+    EmailComponent,
+  ],
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
@@ -36,6 +43,7 @@ import { FormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatIconModule,
     MatCheckboxModule,
+    MatDialogModule,
     MatSliderModule,
     FormsModule,
     IonicModule.forRoot(),

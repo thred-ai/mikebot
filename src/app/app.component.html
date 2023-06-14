@@ -9,18 +9,28 @@
         <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
         Back
       </ion-button>
-      <ion-button class="mx-2 text-white back-btn" (click)="image = undefined; generate.generateDesign()">
-        <ion-icon
-          slot="start"
-          name="reload-outline"
-        ></ion-icon>
+      <ion-button
+        class="mx-2 text-white back-btn"
+        (click)="image = undefined; generate.generateDesign()"
+      >
+        <ion-icon slot="start" name="reload-outline"></ion-icon>
         Regenerate
       </ion-button>
     </div>
 
-    <ion-button class="mx-2 text-white back-btn">
-      <ion-icon slot="end" name="print-outline"></ion-icon>
-      Print
+    <ion-button class="mx-2 text-white back-btn" (click)="openEmailDialog()">
+      <ion-icon *ngIf="!loadingSend" slot="end" name="print-outline"></ion-icon>
+      
+
+      {{ loadingSend ? "Sending" : "Send" }}
+
+      <span
+        class="spinner-border spinner-border-sm ms-1"
+        role="status"
+        slot="end"
+        aria-hidden="true"
+        *ngIf="loadingSend"
+      ></span>
     </ion-button>
   </div>
   <app-photo-editor [src]="image"></app-photo-editor>

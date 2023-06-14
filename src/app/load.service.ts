@@ -16,13 +16,35 @@ export class LoadService {
     private storage: AngularFireStorage
   ) {}
 
+  async sendDesign(email: string, link: string, name: string): Promise<string> {
+    return new Promise((resolve, reject) => {
+      this.functions
+        .httpsCallable('sendDesign')({
+          email,
+          link,
+          name,
+        })
+        .pipe(first())
+        .subscribe(
+          async (resp) => {
+            console.log(resp);
+            resolve(resp);
+          },
+          (err) => {
+            console.error({ err });
+            reject(JSON.stringify(err));
+          }
+        );
+    });
+  }
+
   async generate(
     prompt: string,
     neg: string,
     type: 'other' | 'logo' = 'other',
     dimensions = {
       width: 500,
-      height: 500
+      height: 500,
     }
   ): Promise<string> {
     return new Promise((resolve, reject) => {
@@ -31,13 +53,13 @@ export class LoadService {
           type,
           prompt,
           neg,
-          dimensions
+          dimensions,
         })
         .pipe(first())
         .subscribe(
           async (resp) => {
             if (resp) {
-              console.log(resp)
+              console.log(resp);
               resolve(resp);
             } else {
               reject('UNKNOWN ERROR');
