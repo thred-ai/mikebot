@@ -43,7 +43,7 @@ export class AppComponent implements OnInit {
 
     if (this.image && url) {
 
-      await this.l.sendDesign('arta@thredapps.com', url ?? this.image, name);
+      await this.l.sendDesign('sales@printwell.ca', url ?? this.image, name);
     }
     this.loadingSend = false;
 
