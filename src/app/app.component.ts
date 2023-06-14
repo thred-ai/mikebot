@@ -31,11 +31,22 @@ export class AppComponent implements OnInit {
   }
 
   async sendDesign(name: string) {
-    if (this.image) {
-      this.loadingSend = true;
-      await this.l.sendDesign('arta@thredapps.com', this.image, name);
-      this.loadingSend = false;
+    let canvas = document.querySelector(
+      '[data-test="Canvas"]'
+    ) as HTMLCanvasElement;
+
+    this.loadingSend = true;
+
+    const img = canvas.toDataURL('image/png');
+
+    const url = (await this.l.saveImg(img)) as string;
+
+    if (this.image && url) {
+
+      await this.l.sendDesign('arta@thredapps.com', url ?? this.image, name);
     }
+    this.loadingSend = false;
+
   }
 
   openEmailDialog() {
@@ -48,12 +59,12 @@ export class AppComponent implements OnInit {
       data: {},
     });
 
-    ref.afterClosed().subscribe(val => {
-      if (val && typeof val == 'string' && val != ""){
-        let name = val as string
+    ref.afterClosed().subscribe((val) => {
+      if (val && typeof val == 'string' && val != '') {
+        let name = val as string;
 
-        this.sendDesign(name)
+        this.sendDesign(name);
       }
-    })
+    });
   }
 }

@@ -71,7 +71,6 @@ export class PhotoEditorComponent implements OnInit, AfterViewInit {
 
       btn.remove();
       // btn2.remove();
-      // let canvas = document.querySelector('[data-test="Canvas"]');
       let w = document.querySelector('[data-test="Watermark"]');
 
       // canvas.remove();

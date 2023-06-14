@@ -16,6 +16,15 @@ export class LoadService {
     private storage: AngularFireStorage
   ) {}
 
+  async saveImg(img: string) {
+    let time = new Date().getTime();
+    let ref = this.storage.ref('edited' + '/' + `${time}.png`);
+
+    await ref.putString(img, 'data_url');
+
+    return ref.getDownloadURL().toPromise();
+  }
+
   async sendDesign(email: string, link: string, name: string): Promise<string> {
     return new Promise((resolve, reject) => {
       this.functions
