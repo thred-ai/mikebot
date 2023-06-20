@@ -54,16 +54,18 @@ export class GenerateComponent implements OnInit {
     {
       name: 'Remove Text',
       text: 'No text',
+      title: 'Would you like to remove text?',
       neg_text:
         'text, watermark, letters, alphabet, Graffiti, typography, bad text, language',
-      active: false,
+      active: true,
     },
     {
       name: 'Ultra Realistic',
       text: 'ultra detailed, hyper realistic, professional lighting, RAW, prophoto rgb, 16bit, 35mm',
+      title: 'Would you like the image to look Ultra Realistic?',
       neg_text:
         'blur, haze, too many fingers, overexposed, cropped head, bad frame, out of frame, deformed, cripple, old, fat, ugly, poor, missing arm, extra arms, extra legs, extra head, extra face',
-      active: false,
+      active: true,
     },
   ];
 

@@ -1,8 +1,11 @@
 <div
   class="frame-container d-block d-md-flex justify-content-center align-items-center flex-column p-md-4 bg-light"
 >
-  <div class="w-100 p-4 bg-white shadow rounded" style="max-width: 750px; overflow-y: scroll">
-    <div class="w-100  d-flex justify-content-center align-items-center">
+  <div
+    class="w-100 p-4 bg-white shadow rounded"
+    style="max-width: 750px; overflow-y: scroll"
+  >
+    <div class="w-100 d-flex justify-content-center align-items-center">
       <img
         class="w-100"
         style="max-width: 300px; aspect-ratio: 2.5; object-fit: contain"
@@ -14,7 +17,7 @@
       class="w-100 d-flex justify-content-center align-items-center flex-column"
     >
       <p class="w-100 text-center text-secondary mb-2 mt-3 py-3">
-        Print Design Generator
+        AI Design Generator
       </p>
 
       <!-- <mat-radio-group
@@ -43,82 +46,79 @@
         (ionInput)="setPrompt($event)"
       ></ion-searchbar> -->
 
-      <mat-form-field
-        class="example-chip-list w-100 rounded border"
-        style="overflow: hidden"
-      >
-        <mat-label>Include... (ex. man smiling, sunny)</mat-label>
-        <mat-chip-grid #chipGrid aria-label="Enter fruits">
-          <mat-chip-row
-            *ngFor="let fruit of prompts"
-            (removed)="removePrompt(fruit)"
-            [editable]="true"
-            (edited)="editPrompt(fruit, $event)"
-            [aria-description]="'press enter to edit ' + fruit"
-          >
-            {{ fruit }}
-            <button matChipRemove [attr.aria-label]="'remove ' + fruit">
-              <mat-icon>cancel</mat-icon>
-            </button>
-          </mat-chip-row>
-          <input
-            matInput
-            placeholder="New prompt..."
-            [matChipInputFor]="chipGrid"
-            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-            [matChipInputAddOnBlur]="addOnBlur"
-            (matChipInputTokenEnd)="addPrompt($event)"
-          />
-        </mat-chip-grid>
-      </mat-form-field>
+      <div class="w-100 mt-4">
+        <h4 class="fw-bold w-100">What would you like in the image?</h4>
+        <mat-form-field
+          class="example-chip-list w-100 rounded border mt-2"
+          style="overflow: hidden"
+        >
+          <mat-label>Type here... (ex. man smiling, sunny)</mat-label>
+          <mat-chip-grid #chipGrid aria-label="Enter fruits">
+            <mat-chip-row
+              *ngFor="let fruit of prompts"
+              (removed)="removePrompt(fruit)"
+              [editable]="true"
+              (edited)="editPrompt(fruit, $event)"
+              [aria-description]="'press enter to edit ' + fruit"
+            >
+              {{ fruit }}
+              <button matChipRemove [attr.aria-label]="'remove ' + fruit">
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip-row>
+            <input
+              matInput
+              placeholder="New prompt..."
+              [matChipInputFor]="chipGrid"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              [matChipInputAddOnBlur]="addOnBlur"
+              (matChipInputTokenEnd)="addPrompt($event)"
+            />
+          </mat-chip-grid>
+        </mat-form-field>
+      </div>
 
-      <mat-form-field
-        class="example-chip-list w-100 rounded border my-4"
-        style="overflow: hidden"
-      >
-        <mat-label>Exclude... (ex. dark sky, clouds)</mat-label>
-        <mat-chip-grid #chipGrid2 aria-label="Enter fruits">
-          <mat-chip-row
-            *ngFor="let fruit of negativePrompts"
-            (removed)="removeNegPrompt(fruit)"
-            [editable]="true"
-            (edited)="editNegPrompt(fruit, $event)"
-            [aria-description]="'press enter to edit ' + fruit"
-          >
-            {{ fruit }}
-            <button matChipRemove [attr.aria-label]="'remove ' + fruit">
-              <mat-icon>cancel</mat-icon>
-            </button>
-          </mat-chip-row>
-          <input
-            matInput
-            placeholder="New prompt..."
-            [matChipInputFor]="chipGrid2"
-            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-            [matChipInputAddOnBlur]="addOnBlur"
-            (matChipInputTokenEnd)="addNegPrompt($event)"
-          />
-        </mat-chip-grid>
-      </mat-form-field>
+      <div class="w-100 mt-5 mb-2">
+        <h4 class="fw-bold w-100">What do you NOT want to see in the image? (optional)</h4>
+        <mat-form-field
+          class="example-chip-list w-100 rounded border mb-4 mt-2"
+          style="overflow: hidden"
+        >
+          <mat-label>Type Here... (ex. dark sky, clouds)</mat-label>
+          <mat-chip-grid #chipGrid2 aria-label="Enter fruits">
+            <mat-chip-row
+              *ngFor="let fruit of negativePrompts"
+              (removed)="removeNegPrompt(fruit)"
+              [editable]="true"
+              (edited)="editNegPrompt(fruit, $event)"
+              [aria-description]="'press enter to edit ' + fruit"
+            >
+              {{ fruit }}
+              <button matChipRemove [attr.aria-label]="'remove ' + fruit">
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip-row>
+            <input
+              matInput
+              placeholder="New prompt..."
+              [matChipInputFor]="chipGrid2"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              [matChipInputAddOnBlur]="addOnBlur"
+              (matChipInputTokenEnd)="addNegPrompt($event)"
+            />
+          </mat-chip-grid>
+        </mat-form-field>
+      </div>
 
-      <button
-        class="mx-auto my-3 btn bg-gradient text-white fw-bold"
-        (click)="generateDesign()"
-      >
-        <span
-          class="spinner-border spinner-border-sm me-1"
-          role="status"
-          aria-hidden="true"
-          *ngIf="loading"
-        ></span>
-
-        {{ loading ? "Generating" : "Generate Design" }}
-      </button>
 
       <div
         class="text-start border-top w-100 mt-3 bg-white pe-4 d-flex justify-content-center align-items-start flex-column"
       >
-        <p class="w-100 text-start text-secondary mb-2 mt-3 pt-3">Width: {{width}}px</p>
+      <h4 class="fw-bold w-100 mt-4 mb-0">Image Dimensions</h4>
+      <span class="mt-1  text-dark">(max. 1024x768 rectangle or 768x768 square)</span>
+        <p class="w-100 text-start text-secondary mb-2 mt-3 pt-3">
+          Width: {{ width }}px
+        </p>
         <!-- <ion-input
           class="example-chip-list w-100 rounded border my-2"
           type="number"
@@ -140,30 +140,69 @@
           placeholder="Enter height (px)"
         ></ion-input> -->
 
-        <mat-slider class="w-100" [min]="128" [max]="1024" step="128" showTickMarks discrete [displayWith]="formatLabel">
-          <input matSliderThumb [ngModel]="width" (ngModelChange)="widthChanged($event)">
+        <mat-slider
+          class="w-100"
+          [min]="128"
+          [max]="1024"
+          step="128"
+          showTickMarks
+          discrete
+          [displayWith]="formatLabel"
+        >
+          <input
+            matSliderThumb
+            [ngModel]="width"
+            (ngModelChange)="widthChanged($event)"
+          />
         </mat-slider>
 
-        <p class="w-100 text-start text-secondary mb-2 mt-3 pt-3">Height: {{height}}px</p>
+        <p class="w-100 text-start text-secondary mb-2 mt-3 pt-3">
+          Height: {{ height }}px
+        </p>
 
-        <mat-slider class="w-100" [min]="128" [max]="1024" step="128" showTickMarks discrete [displayWith]="formatLabel">
-          <input matSliderThumb [ngModel]="height" (ngModelChange)="heightChanged($event)">
+        <mat-slider
+          class="w-100"
+          [min]="128"
+          [max]="1024"
+          step="128"
+          showTickMarks
+          discrete
+          [displayWith]="formatLabel"
+        >
+          <input
+            matSliderThumb
+            [ngModel]="height"
+            (ngModelChange)="heightChanged($event)"
+          />
         </mat-slider>
-
       </div>
 
       <div
         class="text-start border-top w-100 my-3 bg-white d-flex justify-content-center align-items-start flex-column"
       >
-        <p class="w-100 text-start text-secondary mb-2 mt-3 py-3">
-          Additional Configurations
-        </p>
+
         <ng-container *ngFor="let fill of autofills">
+          <h4 class="fw-bold w-100 mt-4">{{fill.title}}</h4>
+
           <mat-checkbox [(ngModel)]="fill.active">
             {{ fill.name }}
           </mat-checkbox>
         </ng-container>
       </div>
+
+      <button
+      class="w-100 py-3 mb-3 mt-4 btn bg-gradient text-white fw-bold"
+      (click)="generateDesign()"
+    >
+      <span
+        class="spinner-border spinner-border-sm me-1"
+        role="status"
+        aria-hidden="true"
+        *ngIf="loading"
+      ></span>
+
+      {{ loading ? "Generating" : "Generate Design" }}
+    </button>
     </div>
   </div>
   <!-- <div class="w-100 mt-5">

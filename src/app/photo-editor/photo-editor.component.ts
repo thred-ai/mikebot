@@ -13,8 +13,12 @@ import {
   PhotoEditorSDKUI,
   EditorApi,
   ContainedPrimaryButton,
+  CustomToolbarItemProps,
+  AdvancedUIToolbarItem,
 } from 'demo-vai/no-polyfills';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+//@ts-ignore
+import generateToolbarItems from './photo-editor-react.tsx';
 
 const license = '';
 
@@ -59,11 +63,37 @@ export class PhotoEditorComponent implements OnInit, AfterViewInit {
         this.editor.dispose();
       }
 
+      let ToolbarItem = await generateToolbarItems();
+
+      // console.log(toolBarItem)
+
+      let props = {
+        measurements: {
+          advancedUIToolbar: {
+            width: 100,
+          },
+        },
+        components: {
+          advancedUIToolbarItem: ToolbarItem,
+        },
+      }
+
       this.editor = await PhotoEditorSDKUI.init({
-        license,
+        license: '',
         container: this.container ? this.container.nativeElement : '',
         image: this.src,
         assetBaseUrl: '/assets/photoeditorsdk',
+        custom: {
+          measurements: {
+            advancedUIToolbar: {
+              width: 175,
+            },
+          },
+          components: {
+            advancedUIToolbarItem: ToolbarItem,
+          },
+        }
+        
       });
 
       let btn = document.querySelector('[data-test="MainBarButtonClose"]');
@@ -81,6 +111,4 @@ export class PhotoEditorComponent implements OnInit, AfterViewInit {
       console.log(error);
     }
   }
-
-
 }
