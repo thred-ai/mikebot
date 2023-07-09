@@ -1,6 +1,6 @@
-# Mikebot
+# AI Design Generator Bot
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.1.
+This project is an AI Design Generator for Print Stores, powered by Stable Diffusion. Clients can input prompts and download the design, while optionally also linking to an order-taking email address.
 
 ## Development server
 
